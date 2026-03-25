@@ -8,8 +8,9 @@ Before running the scripts, ensure you have Python installed and the necessary l
 
 Run the following command in your terminal to install all required dependencies:
 
+```bash
 pip install opencv-python deepface matplotlib pandas scikit-learn seaborn
-
+```
 
 ## Project Structure
 
