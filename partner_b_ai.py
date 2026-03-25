@@ -24,15 +24,7 @@ cached_ai_results = []
 
 def classify_emotion(face_roi):
     try:
-        processed_gray = partner_a_vision.preprocess_face(face_roi)
-        
-        if processed_gray is None:
-            raise ValueError("Preprocessing failed to return an image.")
-            
-        processed_bgr = cv2.cvtColor(processed_gray, cv2.COLOR_GRAY2BGR)
-
-        results = DeepFace.analyze(processed_bgr, actions=['emotion'], enforce_detection=False, silent=True)
-        
+        results = DeepFace.analyze(face_roi, actions=['emotion'], enforce_detection=False, silent=True)
         emotions = results[0]['emotion'] 
         dominant = results[0]['dominant_emotion']
         return dominant, emotions
@@ -42,7 +34,6 @@ def classify_emotion(face_roi):
         return "unknown", {"angry": 0, "disgust": 0, "fear": 0, "happy": 0, "sad": 0, "surprise": 0, "neutral": 0}
 
 def draw_rich_visuals(frame, faces):
-    """B2: Draws color-coded boxes, labels, and mini bar charts with caching."""
     global last_ai_check_time, cached_ai_results
     
     current_time = time.time()
